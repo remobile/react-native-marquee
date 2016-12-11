@@ -9,6 +9,7 @@ var {
     Animated,
     Easing,
 } = ReactNative;
+var _ = require('lodash');
 
 module.exports = React.createClass({
     propTypes: {
