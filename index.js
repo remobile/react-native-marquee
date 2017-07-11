@@ -47,7 +47,7 @@ module.exports = React.createClass({
     componentWillReceiveProps (nextProps) {
         if (this.props.children != nextProps.children) {
             this.animateEnable = false;
-            this.width = 0;
+            //this.width = 0;
             this.state.left1.stopAnimation(() => {
                 this.state.left2.stopAnimation(() => {
                     Animated.timing(this.state.left1, {
@@ -59,6 +59,14 @@ module.exports = React.createClass({
                             duration: 0,
                         }).start(() => {
                             this.setState({ list: nextProps.children.split('') });
+                            if (!this.animateEnable) {
+                              this.animateEnable = true;
+                              until(
+                                  ()=>this.width > 0,
+                                  (cb)=>setTimeout(cb, 100),
+                                  ()=>this.startMoveFirstLabelHead()
+                              );
+                           }
                         });
                     });
                 });
